@@ -19,6 +19,10 @@ public class ClientService implements ClientDetailsService {
     @Override
     @Transactional
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        return clientData.findByClientId(clientId).orElseThrow(() -> new ClientRegistrationException("Client not registred"));
+        return clientData.findByClientId(clientId).map(e -> {
+            e.getRegisteredRedirectUri().size();
+            e.getAuthorizedGrantTypes().size();
+            return e;
+        }).orElseThrow(() -> new ClientRegistrationException("Client not registred"));
     }
 }
