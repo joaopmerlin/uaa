@@ -1,0 +1,37 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /uaa
+
+spring:
+  datasource:
+    url: jdbc:h2:./database/uaa
+    username: sa
+  redis:
+    host: 192.168.3.195
+    port: 6379
+
+facebook:
+  client:
+    clientId: 233668646673605
+    clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+    accessTokenUri: https://graph.facebook.com/oauth/access_token
+    userAuthorizationUri: https://www.facebook.com/dialog/oauth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://graph.facebook.com/me
+github:
+  client:
+    clientId: e8653d907100df5e33ac
+    clientSecret: f007fdcfebc82e6ad0b697722866e72232fee2e9
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user
+
+logging:
+  level:
+    org.springframework.security: DEBUG
