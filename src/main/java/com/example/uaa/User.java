@@ -5,13 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "USER")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,19 +18,23 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
 
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
-    @Column(unique = true)
+    @Column(name = "USERNAME", nullable = false, unique = true)
     private String username;
 
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+    @Column(name = "ENABLED", nullable = false)
     private Boolean enabled;
 
     @Override
