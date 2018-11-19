@@ -29,7 +29,7 @@ public class Client implements ClientDetails {
     @JoinColumn(name = "ACCOUNT", nullable = false)
     private Account account;
 
-    @Column(name = "CLIENT_ID", nullable = false)
+    @Column(name = "CLIENT_ID", nullable = false, unique = true)
     private String clientId;
 
     @Column(name = "CLIENT_SECRET", nullable = false)
@@ -50,11 +50,11 @@ public class Client implements ClientDetails {
     )
     @Column(name = "GRANT_TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Set<GrantType> authorizedGrantTypes;
+    private Set<GrantType> grantTypes;
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return authorizedGrantTypes.stream().map(e -> e.name().toLowerCase()).collect(Collectors.toSet());
+        return grantTypes.stream().map(e -> e.name().toLowerCase()).collect(Collectors.toSet());
     }
 
     @Override

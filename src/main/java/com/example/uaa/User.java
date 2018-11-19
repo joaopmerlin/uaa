@@ -3,10 +3,13 @@ package com.example.uaa;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
@@ -37,9 +40,16 @@ public class User implements UserDetails {
     @Column(name = "ENABLED", nullable = false)
     private Boolean enabled;
 
+    @Column(name = "ADMIN", nullable = false)
+    private Boolean admin;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.NO_AUTHORITIES;
+        Set<GrantedAuthority> authorities = new HashSet<>(Set.of(new SimpleGrantedAuthority("ROLE_USER")));
+        if (Boolean.TRUE.equals(admin)) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return authorities;
     }
 
     @Override

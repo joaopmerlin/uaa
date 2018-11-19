@@ -35,13 +35,13 @@ public class UaaApplication implements CommandLineRunner {
         account = accountData.save(account);
 
         User user = new User(1L, "João Paulo Merlin", "joao.p.merlin@gmail.com", "admin",
-                new BCryptPasswordEncoder().encode("admin"), true);
+                new BCryptPasswordEncoder().encode("admin"), true, true);
         user = userData.save(user);
 
         UserAccount userAccount = new UserAccount(1L, user, account);
         userAccountData.save(userAccount);
 
-        Client client = new Client(1L, account, "acme", new BCryptPasswordEncoder().encode("acmesecret"),
+        Client client = new Client(1L, account, "acme", "acmesecret",
                 Set.of("http://localhost:8080/login"), Set.of(GrantType.values()));
         clientData.save(client);
     }

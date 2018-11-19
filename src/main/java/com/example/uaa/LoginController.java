@@ -13,7 +13,7 @@ public class LoginController {
 
     @GetMapping
     public String login(HttpSession session) {
-        SavedRequest savedRequest = SessionSecurityUtil.getSavedRequest(session);
+        SavedRequest savedRequest = SecurityUtil.getSavedRequest(session);
         if (savedRequest == null) {
             return "error";
         }

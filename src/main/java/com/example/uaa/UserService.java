@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
             clientId = SecurityContextHolder.getContext().getAuthentication().getName();
         } else {
-            SavedRequest savedRequest = SessionSecurityUtil.getSavedRequest(request.getSession(false));
+            SavedRequest savedRequest = SecurityUtil.getSavedRequest(request.getSession(false));
             if (savedRequest != null) {
                 clientId = savedRequest.getParameterValues("client_id")[0];
             }
