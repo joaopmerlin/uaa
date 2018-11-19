@@ -1,15 +1,14 @@
 server:
   port: 9999
-  servlet:
-    context-path: /uaa
 
 spring:
   datasource:
     url: jdbc:h2:./database/uaa
     username: sa
   redis:
-    host: 192.168.3.195
-    port: 6379
+    host: 192.168.99.100
+    port: 30209
+    password: redis
 
 facebook:
   client:

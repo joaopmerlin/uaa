@@ -31,7 +31,7 @@
 <body>
 
 <div class="form-login">
-    <form action="/uaa/login" method="post">
+    <form action="/login" method="post">
 
         <input name="username" class="form-control" type="text" placeholder="Usuário" required/>
         <input name="password" class="form-control" type="password" placeholder="Senha" required/>
@@ -43,8 +43,8 @@
 
         <button type="submit" class="btn btn-success btn-block">Entrar</button>
 
-        <a class="btn btn-primary btn-block" href="/uaa/login/facebook">Facebook</a>
-        <a class="btn btn-danger btn-block" href="/uaa/login/github">Github</a>
+        <a class="btn btn-primary btn-block" href="/login/facebook">Facebook</a>
+        <a class="btn btn-danger btn-block" href="/login/github">Github</a>
     </form>
 </div>
 

@@ -42,7 +42,7 @@ public class UaaApplication implements CommandLineRunner {
         userAccountData.save(userAccount);
 
         Client client = new Client(1L, account, "acme", new BCryptPasswordEncoder().encode("acmesecret"),
-                Set.of("http://localhost:8080/login"), Set.of(GrantType.IMPLICIT));
+                Set.of("http://localhost:8080/login"), Set.of(GrantType.values()));
         clientData.save(client);
     }
 }

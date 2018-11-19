@@ -20,7 +20,6 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CompositeFilter;
@@ -42,6 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("oauth2ClientContext")
     private OAuth2ClientContext oauth2ClientContext;
+
+    @Autowired
+    private UaaPrincipalExtractor principalExtractor;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -106,6 +108,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(
                 client.getResource().getUserInfoUri(), client.getClient().getClientId());
         tokenServices.setRestTemplate(template);
+        tokenServices.setPrincipalExtractor(principalExtractor);
         filter.setTokenServices(tokenServices);
         return filter;
     }
